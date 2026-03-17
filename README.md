@@ -40,11 +40,17 @@ python main.py
 
 ## Nguồn tin
 
+**Tin tức:**
 - VnExpress Kinh doanh
 - Cafef
 - VnEconomy
 
-Tin được lọc theo từ khóa vàng (SJC, vàng miếng, giá vàng...) và chỉ lấy tin ≤ 48h.
+**Giá vàng (3 nguồn chính thống):**
+- **SJC** – Công ty Vàng bạc Đá quý Sài Gòn
+- **PNJ** – Công ty Vàng bạc Đá quý Phú Nhuận
+- **DOJI** – Tập đoàn Vàng bạc Đá quý DOJI
+
+Dữ liệu giá vàng qua [vang.today API](https://www.vang.today/vi/api), cập nhật mỗi 5 phút.
 
 ---
 

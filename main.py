@@ -22,11 +22,18 @@ from config import MIN_NEWS
 from src.analyzer import analyze
 from src.delivery import send_n8n, send_telegram
 from src.fetcher import fetch_news
+from src.gold_price import fetch_gold_prices
 
 
 def main():
     print("🟡 Gold News Daily Bot — Đang thu thập tin...")
     news = fetch_news()
+    gold_prices = fetch_gold_prices()
+
+    if gold_prices:
+        print(f"✓ Đã lấy giá vàng SJC, PNJ, DOJI.")
+    else:
+        print("⚠️ Không lấy được giá vàng (tiếp tục không có bảng giá).")
 
     if len(news) < MIN_NEWS:
         print(f"⚠️ Chỉ có {len(news)} tin vàng (cần {MIN_NEWS}+). Vẫn tiếp tục...")
@@ -37,7 +44,7 @@ def main():
 
     print(f"✓ Đã lấy {len(news)} tin vàng. Đang phân tích bằng Gemini...")
     try:
-        report = analyze(news)
+        report = analyze(news, gold_prices)
     except Exception as e:
         print(f"❌ Gemini lỗi: {e}")
         return 1

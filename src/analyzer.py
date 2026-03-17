@@ -24,9 +24,10 @@ OUTPUT_TEMPLATE = """Tạo bản tin theo ĐÚNG format sau (Tiếng Việt):
 ### 🟡 BẢN TIN VÀNG NGÀY [DD/MM/YYYY]
 
 **1. Tổng quan giá vàng**
-- Giá vàng spot / SJC / vàng miếng (nếu có trong tin): ...
-- Biến động: ...
-- Nhận xét nhanh: ...
+BẮT BUỘC dùng dữ liệu giá vàng được cung cấp bên dưới (SJC, PNJ, DOJI). Format:
+- Bảng giá mua/bán từ 3 nguồn SJC, PNJ, DOJI
+- Biến động so với phiên trước
+- Nhận xét nhanh (1-2 câu)
 
 **2. Tin tức nổi bật**
 1. [Tiêu đề tin]
@@ -52,9 +53,9 @@ YÊU CẦU:
 - Gắn link nguồn cho từng tin"""
 
 
-def analyze(news: list[dict]) -> str:
+def analyze(news: list[dict], gold_prices: dict | None = None) -> str:
     """
-    Gửi tin lên Gemini, nhận bản tin đã format.
+    Gửi tin + giá vàng lên Gemini, nhận bản tin đã format.
     """
     if not GEMINI_API_KEY:
         raise ValueError("Chưa cấu hình GEMINI_API_KEY trong .env")
@@ -69,7 +70,18 @@ def analyze(news: list[dict]) -> str:
     data_str = json.dumps(selected, ensure_ascii=False, indent=2)
     today = datetime.now().strftime("%d/%m/%Y")
 
-    user_prompt = f"""DỮ LIỆU TIN TỨC (chỉ dùng tin có trong đây):
+    # Format giá vàng từ 3 nguồn SJC, PNJ, DOJI
+    from src.gold_price import format_gold_prices_for_prompt
+
+    gold_str = format_gold_prices_for_prompt(gold_prices)
+
+    user_prompt = f"""DỮ LIỆU GIÁ VÀNG TRONG NƯỚC (3 nguồn chính thống - BẮT BUỘC dùng trong mục 1):
+
+{gold_str}
+
+---
+
+DỮ LIỆU TIN TỨC (chỉ dùng tin có trong đây):
 
 {data_str}
 
