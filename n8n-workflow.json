@@ -22,7 +22,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://YOUR-APP-URL.railway.app/webhook",
+        "url": "https://gold-news-daily-bot.onrender.com/webhook",
         "options": {}
       },
       "id": "http-request",
@@ -30,7 +30,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [470, 300],
-      "notes": "Thay YOUR-APP-URL bằng URL deploy thực tế"
+      "notes": "Deploy: https://gold-news-daily-bot.onrender.com"
     }
   ],
   "connections": {

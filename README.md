@@ -2,6 +2,8 @@
 
 Bot cá nhân gửi bản tin vàng Việt Nam mỗi ngày lúc 08:00 qua Telegram.
 
+**Deploy:** [https://gold-news-daily-bot.onrender.com](https://gold-news-daily-bot.onrender.com) | Webhook: `/webhook`
+
 ## Cài đặt
 
 ```bash
@@ -54,7 +56,7 @@ Tin được lọc theo từ khóa vàng (SJC, vàng miếng, giá vàng...) và
 1. Đăng nhập [railway.app](https://railway.app)
 2. New Project → Deploy from GitHub (push code lên repo)
 3. Thêm biến môi trường: `GEMINI_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (và `WEBHOOK_SECRET` nếu muốn bảo vệ endpoint)
-4. Lấy URL: `https://your-app.railway.app`
+4. Lấy URL (vd: `https://gold-news-daily-bot.onrender.com`)
 
 **Render** (miễn phí):
 1. Đăng nhập [render.com](https://render.com)
@@ -72,7 +74,7 @@ Tin được lọc theo từ khóa vàng (SJC, vàng miếng, giá vàng...) và
 
 Hoặc tạo thủ công:
 - **Schedule Trigger** → Cron: `0 8 * * *`, Timezone: `Asia/Ho_Chi_Minh`
-- **HTTP Request** → POST → `https://your-app.railway.app/webhook`
+- **HTTP Request** → POST → `https://gold-news-daily-bot.onrender.com/webhook`
 
 ### Bước 3: Kiểm tra
 
