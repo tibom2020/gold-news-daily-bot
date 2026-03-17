@@ -78,8 +78,16 @@ Hoặc tạo thủ công:
 
 ### Bước 3: Kiểm tra
 
-- Gọi thủ công: `curl -X POST https://your-app.railway.app/webhook`
+- Gọi thủ công: `curl -X POST https://gold-news-daily-bot.onrender.com/webhook`
 - Hoặc đợi 08:00 sáng (giờ VN)
+
+### Lỗi "Service unavailable" (Render cold start)
+
+Render free tier sleep sau ~15 phút. Workflow đã có **Wake Render** + **Timeout 90s** + **Retry 3 lần**.
+
+Nếu vẫn lỗi:
+1. Chạy workflow **2 lần liên tiếp** (lần 1 wake, lần 2 chạy)
+2. Dùng [UptimeRobot](https://uptimerobot.com) ping `https://gold-news-daily-bot.onrender.com/health` mỗi 10 phút
 
 ---
 
