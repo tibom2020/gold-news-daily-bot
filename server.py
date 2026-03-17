@@ -18,13 +18,14 @@ from config import MIN_NEWS, WEBHOOK_SECRET
 from src.analyzer import analyze
 from src.delivery import send_n8n, send_telegram
 from src.fetcher import fetch_news
-from src.gold_price import fetch_gold_prices
 
 app = Flask(__name__)
 
 
 def run_bot():
     """Chạy logic bot, trả về (report, news_count, success)."""
+    from src.gold_price import fetch_gold_prices
+
     news = fetch_news()
     gold_prices = fetch_gold_prices()
     if not news:
